@@ -11,3 +11,7 @@ Import/Open project in IDE(Intellij/Eclipse)
 # Description of the Framework
 This is a Page object Model framework. Each page has PageClass.java and PageTest.java classes.
 Used Allure as reporting tool.
+
+
+# Application used to test
+https://openweathermap.org/
