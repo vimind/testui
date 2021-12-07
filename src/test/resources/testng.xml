@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="UITests" verbose="1" annotations="true" parallel="tests" thread-count="2" time-out="3000000">
+
+    <listeners>
+        <listener class-name="com.ui.mytest.utils.TestNGListener"/>
+       <!-- <listener class-name="com.ui.mytest.utils.AnnotationTransformerClass"/>-->
+    </listeners>
+
+    <test name="Booking">
+        <classes>
+            <class name="com.ui.mytest.tests.BookingFlightTest"/>
+        </classes>
+    </test>
+
+</suite>
