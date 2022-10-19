@@ -1,11 +1,6 @@
 package com.ui.mytest.utils;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.InvalidElementStateException;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -40,10 +35,10 @@ public class PageElement {
     }
 
     public void click() {
-        waitUntilElementToBeClickable(locator).click();
+        waitUntilElementToBePresent().click();
     }
 
-    public WebElement waitUntilElementToBeClickable(By locator) {
+    public WebElement waitUntilElementToBeClickable() {
         WebElement element = null;
         try {
             element = new WebDriverWait(driver, TIME_OUT).until(ExpectedConditions.elementToBeClickable(locator));
@@ -53,23 +48,35 @@ public class PageElement {
         return element;
     }
 
-    public WebElement waitUntilElementToBePresent(By locator) {
-        WebElement element =null;
+    public WebElement waitUntilElementToBePresent() {
+        WebElement element = null;
         try {
-            element =new WebDriverWait(driver, TIME_OUT).until(ExpectedConditions.presenceOfElementLocated(locator));
+            element = new WebDriverWait(driver, TIME_OUT).until(ExpectedConditions.presenceOfElementLocated(locator));
         } catch (StaleElementReferenceException | TimeoutException | InvalidElementStateException e) {
             e.printStackTrace();
         }
         return element;
     }
 
-    public void enterData(CharSequence... charSequence){
-        waitUntilElementToBePresent(locator).clear();
-        waitUntilElementToBePresent(locator).sendKeys(charSequence);
+    public void enterData(CharSequence... charSequence) {
+        waitUntilElementToBePresent().clear();
+        waitUntilElementToBePresent().sendKeys(charSequence);
     }
 
     public String getText() {
-         return waitUntilElementToBePresent(locator).getText();
+        return waitUntilElementToBePresent().getText();
+    }
+
+    public void scrollIntoView() {
+        waitUntilElementToBePresent();
+        WebElement element = driver.findElement(locator);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    public void scrollToBottom() {
+        waitUntilElementToBePresent();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,document.body.scrollHeight)", "");
     }
 
 }

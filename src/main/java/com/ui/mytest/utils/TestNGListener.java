@@ -1,25 +1,21 @@
 package com.ui.mytest.utils;
 
-import com.ui.mytest.pages.BasePage;
 import io.qameta.allure.Attachment;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.FindAll;
-import org.slf4j.Logger;
-import org.testng.ISuite;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 
 /**
  * Test listener class which provide implementation for test failure, skip, pass status
+ *
  * @author Vishwas
  */
 @Slf4j
-public class TestNGListener  extends TestListenerAdapter {
-
+public class TestNGListener extends TestListenerAdapter {
 
     @Override
     public void onTestSuccess(ITestResult tr) {
@@ -31,8 +27,8 @@ public class TestNGListener  extends TestListenerAdapter {
     @Override
     public void onTestFailure(ITestResult tr) {
         ITestContext context = tr.getTestContext();
-        WebDriver driver = (WebDriver)context.getAttribute("driver");
-      if (tr.getStatus() == ITestResult.FAILURE) {
+        WebDriver driver = (WebDriver) context.getAttribute("driver");
+        if (tr.getStatus() == ITestResult.FAILURE) {
             log.info(tr.getTestClass().getName(), tr.getMethod().getMethodName() + " TEST FAILED");
             screenshot(driver);
         }
@@ -46,9 +42,8 @@ public class TestNGListener  extends TestListenerAdapter {
     }
 
     @Attachment(type = "image/png")
-    public byte[] screenshot(WebDriver driver) throws NullPointerException{
+    public byte[] screenshot(WebDriver driver) throws NullPointerException {
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
-
 
 }

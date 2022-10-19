@@ -14,6 +14,7 @@ import org.testng.asserts.SoftAssert;
  * This class contains tests with respect to Booking Flights
  * @author Vishwas
  */
+@Test(enabled = false)
 public class BookingFlightTest extends BasePageTest{
 
     HomePage homePage;

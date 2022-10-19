@@ -1,8 +1,6 @@
 package com.ui.mytest.utils;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -12,6 +10,10 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 
+import java.util.HashMap;
+import java.util.Map;
+
+
 /**
  * This class has method to create WebDriver
  *
@@ -19,7 +21,7 @@ import org.openqa.selenium.firefox.FirefoxProfile;
  */
 public class DriverFactory {
 
-    private static ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<WebDriver>();
+    private static final ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<WebDriver>();
 
     public static WebDriver getWebDriver() {
         return threadLocalDriver.get();
@@ -30,7 +32,7 @@ public class DriverFactory {
 
         switch (browser) {
             case "Firefox":
-                System.setProperty("webdriver.gecko.driver", "\\src\\test\\resources\\geckodriver.exe");
+                WebDriverManager.firefoxdriver().setup();
                 FirefoxProfile profile = new FirefoxProfile();
                 profile.setAcceptUntrustedCertificates(true);
                 profile.setAssumeUntrustedCertificateIssuer(false);
@@ -46,7 +48,7 @@ public class DriverFactory {
                 driver = new FirefoxDriver(firefoxOptions);
 
             case "Edge":
-                System.setProperty("webdriver.edge.driver", "\\src\\test\\resources\\msedgedriver_v96_0_1054_43.exe");
+                WebDriverManager.edgedriver().setup();
                 Map<String, Object> edgePrefs = new HashMap<String, Object>();
                 edgePrefs.put("profile.default_content_settings.popups", 0);
                 edgePrefs.put("download.default_directory", TestUtils.downloadPath);
@@ -57,7 +59,7 @@ public class DriverFactory {
                 driver = new EdgeDriver(options);
 
             default:
-                System.setProperty("webdriver.chrome.driver", "C:\\RestFramework\\testui\\src\\test\\resources\\chromedriver_95_54.exe");
+                WebDriverManager.chromedriver().setup();
                 HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
                 chromePrefs.put("profile.default_content_settings.popups", 0);
                 chromePrefs.put("download.default_directory", TestUtils.downloadPath);
