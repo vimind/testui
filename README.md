@@ -12,10 +12,6 @@ Import/Open project in IDE(Intellij/Eclipse)
 This is a Page object Model framework. Each page has PageClass.java and PageTest.java classes.
 Used Allure as reporting tool. Can be used to run tests in parallel.
 
-
-# Application used to test
-https://openweathermap.org/
-
 # Test Execution
 mvn clean test
 
