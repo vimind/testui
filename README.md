@@ -15,3 +15,12 @@ Used Allure as reporting tool. Can be used to run tests in parallel.
 
 # Application used to test
 https://openweathermap.org/
+
+# Test Execution
+mvn clean test
+
+# Report Generation
+Prerequisite: Install allure using following command
+brew install allure
+
+allure generate allure-results --clean -o test-report
