@@ -1,4 +1,4 @@
-# testui
+# testui - Java, Selenium, maven, TestNG, Allure, Maven
 # Dependencies
 1. Java
 2. Selenium
